@@ -120,6 +120,12 @@ body {
     gap: 1.5rem;
 }
 
+.fcci-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
 .dark-mode-toggle {
     color: #273c75;
     font-size: 1.2rem;
@@ -674,12 +680,12 @@ body.dark-mode .navbar {
 }
 
 body.dark-mode .nav-links li a {
-    color: #ffffff;
+    color: #ffffff !important;
 }
 
 body.dark-mode .nav-links li a:hover,
 body.dark-mode .nav-links li a.active {
-    color: #e67e22;
+    color: #e67e22 !important;
 }
 
 body.dark-mode .dark-mode-toggle {
@@ -850,88 +856,132 @@ body.dark-mode .stat-circle.pink {
     font-weight: 500;
 }
 
-/* ===== 4-TILE GRID SECTION (KEY SECTORS 1-4) ===== */
-.sectors-grid-tiles {
+/* ===== UNIFIED 12-SECTOR GRID ===== */
+.sectors-grid-unified {
     display: grid;
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
     margin-bottom: 3rem;
 }
 
-.sector-tile {
-    position: relative;
-    min-height: 240px;
+.sector-card-unified {
+    background: #ffffff;
     border-radius: 16px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(230, 126, 34, 0.08);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    text-align: center;
+    position: relative;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    background-size: cover;
-    background-position: center;
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-
-.sector-tile:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
-}
-
-.tile-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(16, 18, 23, 0.2) 0%, rgba(16, 18, 23, 0.55) 65%, rgba(16, 18, 23, 0.78) 100%);
-}
-
-.tile-content {
-    position: absolute;
-    inset: 0;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 24px;
-    color: #ffffff;
-    z-index: 1;
+    align-items: center;
+    height: 100%;
 }
 
-.tile-label {
-    color: #ffffff;
-    font-size: 1.2rem;
+.sector-card-unified::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #e67e22, #f39c12);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.sector-card-unified:hover::before {
+    transform: scaleX(1);
+}
+
+.sector-card-unified:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(230, 126, 34, 0.15);
+    border-color: rgba(230, 126, 34, 0.2);
+}
+
+.card-image-unified {
+    width: 80px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card-image-unified img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.sector-card-unified:hover .card-image-unified img {
+    transform: scale(1.05);
+}
+
+.sector-card-unified:hover .card-image-unified {
+    box-shadow: 0 4px 12px rgba(230, 126, 34, 0.2);
+}
+
+.sector-card-unified h3 {
+    font-size: 1.1rem;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    transition: color 0.3s ease;
 }
 
-.tile-index {
-    background: rgba(255, 255, 255, 0.12);
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: #ffb347;
+.sector-card-unified:hover h3 {
+    color: #e67e22;
 }
 
-.tile-content p {
-    font-size: 0.95rem;
-    color: #f7f7f7;
-    line-height: 1.45;
-    max-width: 280px;
+.sector-card-unified p {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    line-height: 1.6;
+    flex: 1;
 }
 
+/* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 1024px) {
-    .sectors-grid-tiles {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
+    .sectors-grid-unified {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
     }
 }
 
 @media (max-width: 768px) {
-    .sectors-grid-tiles {
+    .sectors-section {
+        padding: 4rem 5%;
+    }
+    
+    .sectors-grid-unified {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .sector-card-unified {
+        padding: 1.5rem 1rem;
+    }
+    
+    .card-image-unified {
+        width: 70px;
+        height: 50px;
+    }
+    
+    .sector-card-unified h3 {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .sectors-grid-unified {
         grid-template-columns: 1fr;
     }
 }
